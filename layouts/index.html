@@ -52,7 +52,7 @@
     <span class="h2">Most recent</span>
     {{ end }}
 
-    {{ $showAllPostsOnHomePage := false }}
+    {{ $showAllPostsOnHomePage := true }}
     {{ if (isset .Site.Params "showallpostsonhomepage") }}
       {{ $showAllPostsOnHomePage = .Site.Params.ShowAllPostsOnHomePage }}
     {{ end }}
@@ -63,7 +63,7 @@
       {{ range (.Paginate $mainPosts).Pages }}
         <li class="post-item">
           <div class="meta"><time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format $dataFormat }}</time></div>
-          <span><a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
+          <span><span class="category-span">{{ print .Params.categories }}</span> <a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
         </li>
       {{ end }}
     </ul>
@@ -79,7 +79,7 @@
       {{ range (first (.Scratch.Get "count") $mainPosts) }}
         <li class="post-item">
           <div class="meta"><time datetime="{{ time .Date }}" itemprop="datePublished">{{ .Date.Format $dataFormat }}</time></div>
-          <span><a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
+          <span><b>{{ print .Params.categories }}</b> <a href="{{ .Permalink }}">{{ if .Title }} {{- .Title -}} {{ else }} {{- print "Untitled" -}}{{ end }}</a></span>
         </li>
       {{ end }}
     </ul>
